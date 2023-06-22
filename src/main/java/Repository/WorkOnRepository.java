@@ -170,8 +170,8 @@ public class WorkOnRepository {
                 workOnModel.getJobs().setId(workOn.getJobs().getId());
                 workOnModel.getStatus().setId(workOn.getStatus().getId());
                 workOnModel.getStatus().setStatusName(resultSet.getString("statusname"));
-                workOnModel.setDateEnd(resultSet.getString("datebegin"));
-                workOnModel.setDateBegin(resultSet.getString("dateEnd"));
+                workOnModel.setDateEnd(resultSet.getString("dateend"));
+                workOnModel.setDateBegin(resultSet.getString("datebegin"));
                 workOnList.add(workOnModel);
             }
         }catch (Exception e){
