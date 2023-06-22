@@ -71,6 +71,9 @@ public class TaskController extends HttpServlet {
             req.setAttribute("projectList", projectList);
             req.setAttribute("userList", userList);
             url = "/task-add.jsp";
+            if(projectList.size()==0){
+                url = "/404";
+            }
         } else {
             System.out.println("Check post");
             consequence = "failed";
@@ -118,7 +121,7 @@ public class TaskController extends HttpServlet {
 
     public void taskModify(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String url = "/task";
+        String url = "/task/mod";
         String methodCustom = "";
         boolean returnData = false;
         boolean updateIsSuccess = false;
