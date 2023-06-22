@@ -1,0 +1,29 @@
+.notification {
+    position: fixed;
+    top: 10%;
+    left: 25%;
+    width: 50%;
+    background-color: #c0c0c0;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    display: none;
+    z-index: 9999;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    animation: slide-in 0.5s ease-out;
+}
+
+.notification.show {
+    display: block;
+}
+
+.close-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    background-color: white;
+    color: black;
+    border: none;
+    cursor: pointer;
+}

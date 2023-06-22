@@ -1,0 +1,40 @@
+#include <stdio.h>
+int main(){
+    int a[100];
+    int n;
+    do{
+        printf("Nhap n :");
+        scanf("%d",&n);
+    }while(n<0);
+    // nhap mang
+    for(int i=0;i<n;i++){
+        printf("Nhap phan tu thu %d :",i);
+        scanf("%d",&a[i]);
+    }
+    // sap xep mang tang dan
+    for(int i=0;i<n-1;i++){
+        for(int j=i+1;j<n;j++){
+            if(a[i]>a[j]){
+                int temp = a[i];
+                a[i] = a[j];
+                a[j] = temp;
+            }
+        }
+    }
+   
+    //
+    int count =0;
+    int index=a[0];
+    for(int i =0;i<n+1;i++){
+        if(index == a[i]){
+            count++;
+        }
+        else if(index!=a[i]) {
+            printf(" phan tu %d xuat hien : %d lan !\n",index,count);
+            index =a[i];
+            count =0;
+            i--;
+        }
+    }
+
+}
