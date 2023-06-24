@@ -96,11 +96,12 @@ public class UserService {
 //            e.printStackTrace();
 //        }
 
-
-        user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(10)));
+        user.setEmail(user.getEmail().toLowerCase());
+        user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
         return usersRepository.insert(user);
     }
     public boolean modifyUser(UsersModel user,HttpServletRequest req){
+        user.setEmail(user.getEmail().toLowerCase());
         if(user.getRolesModel().getId().equalsIgnoreCase("3")){
             user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(10)));
 

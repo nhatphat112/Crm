@@ -160,17 +160,13 @@ public class GroupWorkController extends HttpServlet {
         String methodCustom = "";
         String url = "/groupwork-mod.jsp";
         String message = "";
+        boolean returnData = false;
         String userId = (String) req.getAttribute("userId");
         String roleUserId = (String) req.getAttribute("roleUserId");
         methodCustom = (req.getParameter("methodCustom")!=null)?req.getParameter("methodCustom"):methodCustom;
         System.out.println("check id"+req.getParameter("id"));
         if (methodCustom.equalsIgnoreCase("get")){
-            req.setAttribute("id",req.getParameter("id"));
-           if(roleUserId.equals("2")){
-               req.setAttribute("userManagerList",groupWorkService.getUserById(userId));
-           }else {
-               req.setAttribute("userManagerList",groupWorkService.getUserListByRoleId("2"));
-           }
+            returnData = true;
 
         } else {
             req.setCharacterEncoding("UTF-8");
@@ -204,23 +200,35 @@ public class GroupWorkController extends HttpServlet {
                                 message = "Success!";
                                 updateIsSuccess = true;
                             } else {
-                                message = "Date End Invalid!";
+                                message = "Update Is Failed!";
                             }
                             req.setAttribute("message", message);
                         }
 
                     }
+                } if(!updateIsSuccess){
+                    returnData = true;
                 }
-                if(!updateIsSuccess){
-                    req.setAttribute("id",id);
-                    req.setAttribute("projectName",projectName);
-                    req.setAttribute("dateBegin",dateBegin);
-                    req.setAttribute("dateEnd",dateEnd);
 
-                }
+
             } else {
                 url = "/groupwork";
             }
+        }
+        System.out.println("Check returndata :"+returnData);
+        if(returnData){
+            req.setAttribute("id",req.getParameter("id"));
+            if(roleUserId.equals("2")){
+                req.setAttribute("userManagerList",groupWorkService.getUserById(userId));
+            }else {
+                req.setAttribute("userManagerList",groupWorkService.getUserListByRoleId("2"));
+                System.out.println("Check size list userManagerList :"+groupWorkService.getUserListByRoleId("2"));
+            }
+            req.setAttribute("id",req.getParameter("id"));
+            req.setAttribute("projectName",req.getParameter("projectName"));
+            req.setAttribute("dateBegin",req.getParameter("dateBegin"));
+            req.setAttribute("dateEnd",req.getParameter("dateEnd"));
+
         }
         req.getSession().setAttribute("messageContent","true");
         if(update){

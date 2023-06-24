@@ -29,15 +29,19 @@ public class ProfileService {
        return usersRepository.selectByEmail(email);
     }
     public UsersModel checkLoginIsSuccess(String email,String password){
-        for (UsersModel user : usersRepository.selectByEmail(email)){
-            System.out.println("Check roleId at checkLoginIsSuccess :"+user.getRolesModel().getId());
-            System.out.println("check password user :"+user.getPassword());
+      try {
+          for (UsersModel user : usersRepository.selectByEmail(email)){
+              System.out.println("Check roleId at checkLoginIsSuccess :"+user.getRolesModel().getId());
+              System.out.println("check password user :"+user.getPassword());
 
-            if(BCrypt.checkpw(password,user.getPassword())){
-                System.out.println("Check password:"+user.getPassword());
-                return user;
-            }
-        }
+              if(BCrypt.checkpw(password,user.getPassword())){
+                  System.out.println("Check password:"+user.getPassword());
+                  return user;
+              }
+          }
+      }catch (Exception e){
+         System.out.println("error at checkLoginIsSuccess : "+e.getMessage());
+      }
         return null;
     }
     public boolean createCookieLogin(HttpServletRequest req,HttpServletResponse resp, UsersModel usersModel){
