@@ -51,7 +51,6 @@ public class RoleFilter implements Filter {
 
         this.roleManagerList.add("/task/add");
         this.roleManagerList.add("/task/mod");
-        this.roleManagerList.add("/task/delete");
         this.roleManagerList.add("/user");
         this.roleManagerList.add("/user/delete");
 
